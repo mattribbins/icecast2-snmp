@@ -17,6 +17,6 @@ rocommunity public 192.168.0.0/24
 
 # "Pass-through" MIB extension command
 # Icecast2 Listeners
-pass .1.3.6.1.4.1.8000.2.1 /bin/sh /usr/local/bin/icecast2-listeners
+pass .1.3.6.1.4.1.8000.2.1 /bin/sh /usr/local/bin/icecast2-listeners.sh
 # Icecast2 Sources
-pass .1.3.6.1.4.1.8000.2.3 /bin/sh /usr/local/bin/icecast2-sources
+pass .1.3.6.1.4.1.8000.2.3 /bin/sh /usr/local/bin/icecast2-sources.sh

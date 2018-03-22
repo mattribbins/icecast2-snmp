@@ -7,11 +7,12 @@ will expose the number of listeners and the number of sources.
 Requirements
 ------------
 * Icecast 2 server
-* Python 3
+* Python 3 with Requests library
 
 Installation
 ---------------------
 * Set up the `snmpd` daemon
+* Install Python3 if not already installed. Ensure the requests library is installed (usually by default)
 * Copy the icecast2-snmp.py, icecast2-listeners.sh and icecast2-sources.sh to a folder, for example /usr/local/bin/. Edit the sh scripts to point to the correct folder that icecast2-snmp.py is located!
 * Edit the snmpd passthrough configuration, look at snmpd.conf.example as an example.
 
