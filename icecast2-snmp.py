@@ -81,12 +81,12 @@ def ic2xml():
 
 		elif opt in ("-c", "-check-stream"):
 			# -1 if stream does not exist. Else, listener count.
-			xpath = f".//source[@mount=\"/{arg}\"]"
+			xpath = ".//source[@mount=\"/%s\"]" % arg
 			source = xmlroot.findall(xpath)
 			if len(source) == 0:
 				print("-1")
 			else:
-				listeners = xmlroot.find(f"{xpath}/listeners")
+				listeners = xmlroot.find("%s/listeners" % xpath)
 				print(listeners.text)
 
 
