@@ -97,3 +97,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Visual Studio
+icecast2-snmp.pyproj
+icecast2-snmp.sln
+.vs/

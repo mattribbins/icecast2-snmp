@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-# -*- mode: python; coding: utf-8-unix; -*-
+# -*- mode: python; coding: utf-8; -*-
 
 # Icecast2 SNMP
 # Author: Matt Ribbins (mattyribbo.co.uk) for Celador Radio (celador.co.uk)
@@ -42,6 +42,7 @@ password = os.getenv('ice2pass','hackme')
 import os.path, time, sys, getopt
 import requests
 from xml.dom import minidom
+from xml.etree import ElementTree as ET
 
 host = "http://" + host + "/admin/stats"
 
@@ -52,7 +53,7 @@ def munin_print(u):
 def ic2xml():
 	# Get
 	try:
-	    opts, args = getopt.getopt(sys.argv[1:], "hls", ["total-listeners", "total-sources"])
+	    opts, args = getopt.getopt(sys.argv[1:], "hlsc:", ["total-listeners", "total-sources", "check-stream="])
 	except getopt.GetoptError:
 	    print("-1")
 	    exit(1)
@@ -63,6 +64,7 @@ def ic2xml():
 	xmldoc = minidom.parseString(req.text)
 	xmldoc = xmldoc.firstChild
 
+	xmlroot = ET.fromstring(req.text)
 
 	for opt, arg in opts:
 		if opt == '-h':
@@ -76,6 +78,16 @@ def ic2xml():
 			total_sources = int(xmldoc.getElementsByTagName("sources")[0].firstChild.nodeValue)
 			total_sources = round(total_sources)
 			print(total_sources)
+
+		elif opt in ("-c", "-check-stream"):
+			# -1 if stream does not exist. Else, listener count.
+			xpath = f".//source[@mount=\"/{arg}\"]"
+			source = xmlroot.findall(xpath)
+			if len(source) == 0:
+				print("-1")
+			else:
+				listeners = xmlroot.find(f"{xpath}/listeners")
+				print(listeners.text)
 
 
 if __name__ == "__main__":

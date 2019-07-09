@@ -13,8 +13,15 @@ Installation
 ---------------------
 * Set up the `snmpd` daemon
 * Install Python3 if not already installed. Ensure the requests library is installed (usually by default)
-* Copy the icecast2-snmp.py, icecast2-listeners.sh and icecast2-sources.sh to a folder, for example /usr/local/bin/. Edit the sh scripts to point to the correct folder that icecast2-snmp.py is located!
+* Copy the icecast2-snmp.py and bash example scripts to a folder, for example /usr/local/bin/. Edit the sh scripts, ensure they point to the correct folder that icecast2-snmp.py is located!
 * Edit the snmpd passthrough configuration, look at snmpd.conf.example as an example.
+
+Usage
+-----
+Set up the SNMP passthrough scripts as appropriate. icecast2-snmp.py can report the following information:
+* ``-l --total-listeners`` reports the number of total listeners connected to the server
+* ``-s -total-sources`` reports the number of sources connected to the server
+* ``-c <stream-name> --check-stream=<stream-name>`` reports the number of listeners on a stream, -1 if stream doesn't exist
 
 Testing
 -------
